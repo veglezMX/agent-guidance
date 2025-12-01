@@ -1,0 +1,89 @@
+# ==============================================================================
+# CONSTRAINTS TEMPLATE
+# ==============================================================================
+# Define what agents are NOT allowed to do.
+# These are hard boundaries that must never be violated.
+#
+# Instructions:
+# 1. List security rules
+# 2. Define performance limits
+# 3. Specify forbidden patterns
+# 4. Be specific and actionable
+# ==============================================================================
+
+constraints:
+  # ==============================================================================
+  # SECURITY - Critical safety rules
+  # ==============================================================================
+  - id: "no-secrets-in-code"
+    category: "security"
+    severity: "critical"
+    
+    rule: "Never hardcode secrets, API keys, passwords, or tokens in source code"
+    
+    violations:
+      - "const API_KEY = 'sk-1234...'"
+      - "password = 'admin123'"
+    
+    correct_approach:
+      - "Use environment variables"
+      - "Use secret management service"
+      - "Read from secure vault"
+    
+    example: |
+      ❌ const apiKey = "hardcoded-key"
+      ✅ const apiKey = process.env.API_KEY
+  
+  # Add more security constraints
+  
+  # ==============================================================================
+  # PERFORMANCE - Resource limits
+  # ==============================================================================
+  - id: "query-limit"
+    category: "performance"
+    severity: "high"
+    
+    rule: "Database queries must limit results to maximum 1000 records"
+    
+    rationale: "Prevent memory exhaustion and slow response times"
+    
+    example: |
+      ❌ db.users.find()
+      ✅ db.users.find().limit(1000)
+  
+  # Add more performance constraints
+  
+  # ==============================================================================
+  # CODE QUALITY - Standards enforcement
+  # ==============================================================================
+  - id: "no-any-type"
+    category: "code-quality"
+    severity: "medium"
+    
+    rule: "TypeScript code must not use 'any' type"
+    
+    alternatives:
+      - "Use 'unknown' and narrow the type"
+      - "Define proper interface"
+      - "Use generics"
+    
+    example: |
+      ❌ function process(data: any) { }
+      ✅ function process(data: unknown) { }
+      ✅ function process<T>(data: T) { }
+  
+  # Add more code quality constraints
+
+# ==============================================================================
+# CONSTRAINT ENFORCEMENT
+# ==============================================================================
+# How these constraints are enforced (optional)
+enforcement:
+  automated:
+    - "ESLint rules"
+    - "Pre-commit hooks"
+    - "CI/CD checks"
+  
+  manual:
+    - "Code review"
+    - "Architecture review"

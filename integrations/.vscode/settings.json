@@ -1,0 +1,96 @@
+{
+  "// COOKBOOK SYSTEM SETTINGS": "",
+  "ai.cookbook.enabled": true,
+  "ai.cookbook.path": "./team-cookbook",
+  "ai.cookbook.indexFile": "_index.yaml",
+  "ai.cookbook.enforceConstraints": true,
+  
+  "// CURSOR SETTINGS": "",
+  "cursor.systemPrompt": "Read AGENTS.md and team-cookbook/_index.yaml before generating code. Follow team patterns strictly.",
+  "cursor.composer.systemMessage": "Check team-cookbook/_index.yaml for patterns and constraints before implementation.",
+  
+  "// GITHUB COPILOT SETTINGS": "",
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "typescript": true,
+    "typescriptreact": true
+  },
+  "github.copilot.advanced": {
+    "inlineSuggestCount": 3,
+    "contextFiles": [
+      "team-cookbook/_index.yaml",
+      "AGENTS.md",
+      "team-cookbook/constraints/*.yaml"
+    ]
+  },
+  
+  "// CONTINUE.DEV SETTINGS": "",
+  "continue.telemetryEnabled": false,
+  "continue.enableTabAutocomplete": true,
+  
+  "// CODY SETTINGS": "",
+  "cody.commandCodeLenses": true,
+  "cody.codebase": "./",
+  "cody.autocomplete.enabled": true,
+  "cody.chat.preInstruction": "Check team-cookbook/_index.yaml for team patterns",
+  
+  "// FILE ASSOCIATIONS": "",
+  "files.associations": {
+    "*.yaml": "yaml",
+    ".cursorrules": "plaintext",
+    ".continuerc.json": "jsonc",
+    "AGENTS.md": "markdown"
+  },
+  
+  "// YAML SUPPORT": "",
+  "yaml.schemas": {
+    "./team-cookbook/schemas/index-schema.json": "team-cookbook/_index.yaml",
+    "./team-cookbook/schemas/pattern-schema.json": "team-cookbook/patterns/*.yaml",
+    "./team-cookbook/schemas/constraint-schema.json": "team-cookbook/constraints/*.yaml"
+  },
+  
+  "// FILE WATCHING": "",
+  "files.watcherExclude": {
+    "**/.git/**": true,
+    "**/node_modules/**": true
+  },
+  
+  "// QUICK OPEN": "",
+  "search.quickOpen.includeHistory": true,
+  "search.quickOpen.includeSymbols": true,
+  
+  "// RECOMMENDED FOR COOKBOOK EDITING": "",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  
+  "// FILE EXPLORER": "",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.yaml": "${capture}.schema.json",
+    "_index.yaml": "README.md, QUICKSTART.md",
+    "AGENTS.md": ".cursorrules, .continuerc.json, .github, .cody"
+  },
+  
+  "// SEARCH SETTINGS": "",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true
+  },
+  
+  "// RECOMMENDED EXTENSIONS": "",
+  "recommendations": [
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "github.copilot",
+    "github.copilot-chat",
+    "continue.continue",
+    "sourcegraph.cody-ai"
+  ]
+}

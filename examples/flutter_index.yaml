@@ -1,0 +1,165 @@
+cookbook_version: "1.0.0"
+last_updated: "2024-12-01"
+team: "Mobile Team"
+
+context:
+  stack: ["Flutter 3.24", "Dart 3.5", "Riverpod 2.x", "GoRouter", "Freezed"]
+  platforms: ["iOS", "Android", "Web"]
+  architecture: "feature-first with clean architecture layers"
+  state_management: "Riverpod"
+
+sections:
+  - id: "constraints"
+    priority: 1
+    description: "Widget composition rules, platform limitations, performance budgets"
+    
+  - id: "project-structure"
+    priority: 2
+    description: "Feature folders, layer separation, shared modules"
+    
+  - id: "state-management"
+    priority: 3
+    description: "Riverpod providers, state classes, notifiers, async data"
+    
+  - id: "schemas"
+    priority: 4
+    description: "Data models with Freezed, JSON serialization, form validation"
+    
+  - id: "patterns"
+    priority: 5
+    description: "Widget patterns, navigation, dependency injection, error handling"
+    
+  - id: "ui-components"
+    priority: 6
+    description: "Reusable widgets, theming, responsive design, animations"
+    
+  - id: "platform-specific"
+    priority: 7
+    description: "Platform channels, native code integration, permissions"
+    
+  - id: "networking"
+    priority: 8
+    description: "HTTP clients (Dio), API clients, authentication, caching"
+    
+  - id: "storage"
+    priority: 9
+    description: "Local database (Drift/Hive), secure storage, shared preferences"
+    
+  - id: "testing"
+    priority: 10
+    description: "Widget tests, integration tests, golden tests, mocking"
+    
+  - id: "build-config"
+    priority: 11
+    description: "Flavors/schemes, environment config, code generation, build variants"
+    
+  - id: "workflows"
+    priority: 12
+    description: "CI/CD, code generation, releases, App Store/Play Store"
+    
+  - id: "decisions"
+    priority: 13
+    description: "Why Riverpod, navigation approach, architecture decisions"
+    
+  - id: "examples"
+    priority: 14
+    description: "Complete features, complex UIs, platform integration examples"
+
+quick_reference:
+  # Project Setup
+  new_feature: "project-structure/features.yaml#feature-template"
+  run_codegen: "build-config/code-generation.yaml#build-runner"
+  add_package: "build-config/dependencies.yaml#pubspec"
+  
+  # State Management
+  new_provider: "state-management/providers.yaml#notifier-provider"
+  async_provider: "state-management/providers.yaml#future-provider"
+  form_state: "state-management/forms.yaml#form-notifier"
+  
+  # UI Components
+  new_screen: "patterns/screens.yaml#consumer-widget"
+  new_widget: "ui-components/widgets.yaml#stateless-template"
+  dialog: "ui-components/overlays.yaml#adaptive-dialog"
+  bottom_sheet: "ui-components/overlays.yaml#modal-bottom-sheet"
+  
+  # Data & Networking
+  api_client: "networking/rest-api.yaml#dio-client"
+  data_model: "schemas/models.yaml#freezed-model"
+  repository: "patterns/repository.yaml#repository-template"
+  
+  # Platform Specific
+  method_channel: "platform-specific/channels.yaml#method-channel"
+  request_permission: "platform-specific/permissions.yaml#permission-handler"
+  
+  # Testing
+  run_tests: "testing/running.yaml#test-all"
+  widget_test: "testing/widget.yaml#pump-widget"
+  golden_test: "testing/golden.yaml#compare-golden"
+  
+  # Navigation
+  new_route: "patterns/navigation.yaml#go-router-route"
+  
+  # Common Issues
+  overflow_error: "troubleshooting/layout.yaml#render-overflow"
+  state_not_updating: "troubleshooting/state.yaml#provider-not-rebuilding"
+
+critical_constraints:
+  - ref: "constraints/performance.yaml#60fps-budget"
+  - ref: "constraints/widgets.yaml#no-stateful-if-possible"
+  - ref: "constraints/state.yaml#immutable-state-only"
+  - ref: "constraints/platform.yaml#ios-guidelines"
+  - ref: "constraints/platform.yaml#android-guidelines"
+  - ref: "constraints/security.yaml#no-sensitive-data-in-logs"
+
+glossary:
+  provider: "Riverpod's dependency injection and state management primitive"
+  consumer: "Widget that listens to providers and rebuilds on change"
+  notifier: "Class that manages mutable state for a provider"
+  freezed: "Code generation for immutable data classes"
+  flavor: "Build variant (dev, staging, prod) with different configs"
+  method_channel: "Bridge for native platform communication"
+  golden_test: "Visual regression test comparing widget screenshots"
+
+dependencies:
+  sdk:
+    flutter: ">=3.24.0"
+    dart: ">=3.5.0"
+    
+  state_management:
+    flutter_riverpod: "^2.5.0"
+    riverpod_annotation: "^2.3.0"
+    
+  data:
+    freezed: "^2.5.0"
+    freezed_annotation: "^2.4.0"
+    json_serializable: "^6.8.0"
+    
+  navigation:
+    go_router: "^14.2.0"
+    
+  networking:
+    dio: "^5.7.0"
+    retrofit: "^4.4.0"
+    
+  storage:
+    drift: "^2.20.0"
+    flutter_secure_storage: "^9.2.0"
+    
+  dev:
+    build_runner: "^2.4.0"
+    flutter_lints: "^4.0.0"
+    mockito: "^5.4.0"
+
+environments:
+  local:
+    flavor: "dev"
+    run_command: "flutter run --flavor dev -t lib/main_dev.dart"
+    
+  staging:
+    flavor: "staging"
+    run_command: "flutter run --flavor staging -t lib/main_staging.dart"
+    
+  production:
+    flavor: "prod"
+    build_ios: "flutter build ipa --release --flavor prod"
+    build_android: "flutter build appbundle --release --flavor prod"

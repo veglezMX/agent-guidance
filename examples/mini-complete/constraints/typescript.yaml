@@ -1,0 +1,69 @@
+constraints:
+  - id: "no-any-type"
+    category: "type-safety"
+    severity: "critical"
+    
+    rule: "Never use 'any' type in TypeScript code"
+    
+    rationale: "Defeats the purpose of TypeScript and loses type safety"
+    
+    violations:
+      - "function process(data: any)"
+      - "const items: any[] = []"
+      - "props: any"
+    
+    correct_approach:
+      - "Use 'unknown' and narrow the type"
+      - "Define explicit interfaces"
+      - "Use generics for flexible types"
+    
+    example: |
+      ❌ BAD
+      function handleData(data: any) {
+        return data.value
+      }
+      
+      ✅ GOOD
+      interface Data {
+        value: string
+      }
+      function handleData(data: Data) {
+        return data.value
+      }
+  
+  - id: "explicit-props-interface"
+    category: "type-safety"
+    severity: "high"
+    
+    rule: "All component props must have an explicit interface"
+    
+    example: |
+      ❌ BAD
+      export function Button(props) {
+        return <button>{props.label}</button>
+      }
+      
+      ✅ GOOD
+      interface ButtonProps {
+        label: string
+      }
+      export function Button({ label }: ButtonProps) {
+        return <button>{label}</button>
+      }
+  
+  - id: "strict-null-checks"
+    category: "type-safety"
+    severity: "high"
+    
+    rule: "Handle null and undefined explicitly"
+    
+    example: |
+      ❌ BAD
+      function getName(user: User) {
+        return user.name.toUpperCase()  // Might crash if name is null
+      }
+      
+      ✅ GOOD
+      function getName(user: User) {
+        return user.name?.toUpperCase() ?? 'Unknown'
+      }

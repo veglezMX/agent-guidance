@@ -1,0 +1,102 @@
+patterns:
+  - id: "functional-component"
+    category: "component"
+    applies_to: ["frontend"]
+    
+    description: "Standard React functional component with TypeScript"
+    
+    template: |
+      interface {ComponentName}Props {
+        requiredProp: string
+        optionalProp?: number
+        children?: React.ReactNode
+      }
+      
+      export function {ComponentName}({
+        requiredProp,
+        optionalProp,
+        children
+      }: {ComponentName}Props) {
+        return (
+          <div>
+            {children}
+          </div>
+        )
+      }
+    
+    rules:
+      - "Props interface must be named {ComponentName}Props"
+      - "Destructure props in function parameters"
+      - "Use named export, not default export"
+      - "File name must match component name"
+    
+    naming:
+      file: "ComponentName.tsx"
+      component: "PascalCase"
+      props_interface: "{ComponentName}Props"
+    
+    example_ref: "code-examples/Button.tsx"
+
+  - id: "component-with-state"
+    category: "component"
+    applies_to: ["frontend"]
+    
+    description: "Component with local state using useState"
+    
+    template: |
+      import { useState } from 'react'
+      
+      interface {ComponentName}Props {
+        initialValue: number
+      }
+      
+      export function {ComponentName}({ initialValue }: {ComponentName}Props) {
+        const [count, setCount] = useState(initialValue)
+        
+        const handleIncrement = () => {
+          setCount(count + 1)
+        }
+        
+        return (
+          <div>
+            <p>Count: {count}</p>
+            <button onClick={handleIncrement}>Increment</button>
+          </div>
+        )
+      }
+    
+    rules:
+      - "Initialize state with props if needed"
+      - "Event handlers named handle{Event}"
+      - "Event handlers defined before JSX return"
+    
+    example_ref: "code-examples/Counter.tsx"
+
+  - id: "component-with-children"
+    category: "component"
+    applies_to: ["frontend"]
+    
+    description: "Wrapper component that accepts children"
+    
+    template: |
+      interface {ComponentName}Props {
+        className?: string
+        children: React.ReactNode
+      }
+      
+      export function {ComponentName}({
+        className = '',
+        children
+      }: {ComponentName}Props) {
+        return (
+          <div className={className}>
+            {children}
+          </div>
+        )
+      }
+    
+    rules:
+      - "children prop must be React.ReactNode type"
+      - "Provide default values for optional props"
+    
+    example_ref: "code-examples/Card.tsx"

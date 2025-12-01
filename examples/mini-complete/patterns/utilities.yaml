@@ -1,0 +1,68 @@
+patterns:
+  - id: "pure-function"
+    category: "utility"
+    applies_to: ["frontend", "backend"]
+    
+    description: "Pure utility function with explicit types"
+    
+    template: |
+      export function {functionName}(param: ParamType): ReturnType {
+        // Pure logic - no side effects
+        return result
+      }
+    
+    rules:
+      - "Must be pure (same input = same output)"
+      - "No side effects (no external state changes)"
+      - "Explicit return type required"
+      - "Export directly, no default export"
+    
+    naming:
+      function: "camelCase"
+      file: "functionName.ts or utils.ts"
+    
+    example_ref: "code-examples/formatDate.ts"
+
+  - id: "type-guard"
+    category: "utility"
+    applies_to: ["frontend", "backend"]
+    
+    description: "TypeScript type guard for runtime type checking"
+    
+    template: |
+      export function is{TypeName}(value: unknown): value is {TypeName} {
+        return (
+          typeof value === 'object' &&
+          value !== null &&
+          'property' in value
+        )
+      }
+    
+    rules:
+      - "Function name starts with 'is'"
+      - "Parameter must be 'unknown' type"
+      - "Return type must use 'is' type predicate"
+      - "Perform runtime checks"
+    
+    example_ref: "code-examples/isUser.ts"
+
+  - id: "constants"
+    category: "utility"
+    applies_to: ["frontend", "backend"]
+    
+    description: "Constant values with explicit types"
+    
+    template: |
+      export const {CONSTANT_NAME} = {
+        KEY1: 'value1',
+        KEY2: 'value2',
+      } as const
+      
+      export type {ConstantName}Key = keyof typeof {CONSTANT_NAME}
+    
+    rules:
+      - "Use UPPER_SNAKE_CASE for constant names"
+      - "Add 'as const' for literal types"
+      - "Export type for keys if needed"
+    
+    example_ref: "code-examples/constants.ts"

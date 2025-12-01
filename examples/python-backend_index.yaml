@@ -1,0 +1,133 @@
+cookbook_version: "1.0.0"
+last_updated: "2024-12-01"
+team: "Backend Team"
+
+context:
+  stack: ["Python 3.12", "FastAPI", "PostgreSQL", "Redis", "Celery"]
+  architecture: "async-first microservices"
+  primary_patterns: ["dependency_injection", "repository", "unit_of_work"]
+  package_manager: "uv"  # or poetry, pip-tools
+
+sections:
+  - id: "constraints"
+    priority: 1
+    description: "Type hints required, async/await rules, security boundaries"
+    
+  - id: "environment"
+    priority: 2
+    description: "Virtual env setup, .env patterns, dependency management"
+    
+  - id: "schemas"
+    priority: 3
+    description: "Pydantic models, SQLAlchemy models, API contracts"
+    
+  - id: "patterns"
+    priority: 4
+    description: "FastAPI endpoints, service layer, repository pattern, async patterns"
+    
+  - id: "database"
+    priority: 5
+    description: "Alembic migrations, connection pooling, transaction management"
+    
+  - id: "background-jobs"
+    priority: 6
+    description: "Celery tasks, scheduling, retry strategies, monitoring"
+    
+  - id: "testing"
+    priority: 7
+    description: "Pytest fixtures, mocking, async tests, test containers"
+    
+  - id: "observability"
+    priority: 8
+    description: "Logging, metrics (Prometheus), tracing (OpenTelemetry), error tracking"
+    
+  - id: "workflows"
+    priority: 9
+    description: "CI/CD with GitHub Actions, pre-commit hooks, release process"
+    
+  - id: "integrations"
+    priority: 10
+    description: "External APIs, message brokers (RabbitMQ/Kafka), caching"
+    
+  - id: "decisions"
+    priority: 11
+    description: "Why FastAPI over Django, async vs sync, architecture choices"
+    
+  - id: "examples"
+    priority: 12
+    description: "Complete CRUD service, async worker, webhook handler"
+
+quick_reference:
+  # Setup & Environment
+  new_service: "patterns/service-structure.yaml#fastapi-service"
+  setup_venv: "environment/setup.yaml#uv-venv"
+  add_dependency: "environment/dependencies.yaml#uv-add"
+  
+  # Code Creation
+  new_endpoint: "patterns/api.yaml#crud-endpoint"
+  new_repository: "patterns/data-access.yaml#repository"
+  new_background_task: "patterns/celery.yaml#task-template"
+  
+  # Database
+  create_migration: "database/migrations.yaml#alembic-autogenerate"
+  rollback_migration: "database/migrations.yaml#alembic-downgrade"
+  
+  # Data Models
+  pydantic_schema: "schemas/pydantic-patterns.yaml#base-schema"
+  sqlalchemy_model: "schemas/sqlalchemy-patterns.yaml#base-model"
+  
+  # Testing
+  run_tests: "testing/pytest.yaml#run-all"
+  test_endpoint: "testing/integration.yaml#api-test"
+  mock_external: "testing/mocking.yaml#httpx-mock"
+  
+  # Debugging
+  debug_async: "troubleshooting/async-issues.yaml#event-loop"
+  connection_pool: "troubleshooting/database.yaml#pool-exhausted"
+
+critical_constraints:
+  - ref: "constraints/typing.yaml#strict-type-hints"
+  - ref: "constraints/async.yaml#no-blocking-calls"
+  - ref: "constraints/security.yaml#sql-injection-prevention"
+  - ref: "constraints/security.yaml#pydantic-validation"
+  - ref: "constraints/performance.yaml#connection-pooling"
+
+glossary:
+  dependency_injection: "FastAPI's Depends() for managing dependencies"
+  unit_of_work: "Transaction boundary pattern for database operations"
+  background_task: "Async task for non-blocking operations"
+  lifespan: "FastAPI startup/shutdown event handlers"
+
+dependencies:
+  runtime:
+    python: ">=3.12"
+    fastapi: "^0.115.0"
+    uvicorn: "^0.30.0"
+    sqlalchemy: "^2.0.0"
+    alembic: "^1.13.0"
+    pydantic: "^2.9.0"
+    celery: "^5.4.0"
+    redis: "^5.0.0"
+    
+  dev:
+    pytest: "^8.3.0"
+    pytest-asyncio: "^0.24.0"
+    ruff: "^0.7.0"
+    mypy: "^1.11.0"
+    
+  monitoring:
+    prometheus-client: "^0.20.0"
+    opentelemetry-api: "^1.27.0"
+
+environments:
+  local:
+    setup_ref: "environment/setup.yaml#docker-compose"
+    services:
+      api: "http://localhost:8000"
+      postgres: "postgresql://localhost:5432/devdb"
+      redis: "redis://localhost:6379"
+      celery_worker: "celery -A app.worker worker"
+      
+  production:
+    deployment_ref: "workflows/deployment.yaml#kubernetes"
+    monitoring_ref: "observability/production.yaml"

@@ -1,0 +1,68 @@
+constraints:
+  - id: "no-class-components"
+    category: "react-patterns"
+    severity: "high"
+    
+    rule: "Use functional components only, not class components"
+    
+    rationale: "Functional components with hooks are the modern React standard"
+    
+    example: |
+      ❌ BAD
+      class Button extends React.Component {
+        render() {
+          return <button>{this.props.label}</button>
+        }
+      }
+      
+      ✅ GOOD
+      function Button({ label }: ButtonProps) {
+        return <button>{label}</button>
+      }
+  
+  - id: "named-exports-only"
+    category: "code-organization"
+    severity: "medium"
+    
+    rule: "Use named exports, not default exports"
+    
+    rationale: "Better IDE support, easier refactoring, clearer imports"
+    
+    example: |
+      ❌ BAD
+      export default function Button() { }
+      
+      ✅ GOOD
+      export function Button() { }
+  
+  - id: "one-component-per-file"
+    category: "code-organization"
+    severity: "medium"
+    
+    rule: "Each component must be in its own file"
+    
+    example: |
+      ❌ BAD (Button.tsx)
+      export function Button() { }
+      export function Icon() { }
+      
+      ✅ GOOD
+      Button.tsx → export function Button() { }
+      Icon.tsx   → export function Icon() { }
+  
+  - id: "destructure-props"
+    category: "code-style"
+    severity: "low"
+    
+    rule: "Destructure props in function parameters"
+    
+    example: |
+      ❌ BAD
+      function Button(props: ButtonProps) {
+        return <button>{props.label}</button>
+      }
+      
+      ✅ GOOD
+      function Button({ label }: ButtonProps) {
+        return <button>{label}</button>
+      }

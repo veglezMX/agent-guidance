@@ -1,0 +1,110 @@
+# ==============================================================================
+# COOKBOOK INDEX TEMPLATE
+# ==============================================================================
+# This is the main navigation file for your team's cookbook.
+# AI agents start here to understand your codebase patterns.
+#
+# Instructions:
+# 1. Fill in the context section with your tech stack
+# 2. Define sections relevant to your team
+# 3. Map common tasks in quick_reference
+# 4. List critical constraints that agents must check first
+# ==============================================================================
+
+cookbook_version: "1.0.0"
+last_updated: "2024-12-01"  # Update this when you make changes
+team: "YourTeamName"         # Your team or project name
+
+# ==============================================================================
+# CONTEXT - Quick overview for AI agents
+# ==============================================================================
+context:
+  # List your primary technologies (languages, frameworks, databases)
+  stack: 
+    - "Language"      # e.g., "TypeScript", "Python 3.12"
+    - "Framework"     # e.g., "React 19", "FastAPI"
+    - "Database"      # e.g., "PostgreSQL", "MongoDB"
+    - "Other"         # e.g., "Redis", "Docker"
+  
+  # Describe your high-level architecture
+  architecture: "description"  # e.g., "microservices", "monolith", "serverless"
+  
+  # List your most important patterns
+  primary_patterns:
+    - "pattern1"     # e.g., "repository", "dependency_injection"
+    - "pattern2"
+
+# ==============================================================================
+# SECTIONS - What documentation exists
+# ==============================================================================
+# Priority determines the order agents read sections (1 = first, higher = later)
+# Only include sections you actually have!
+sections:
+  - id: "constraints"
+    priority: 1
+    description: "Hard boundaries: what NOT to do"
+    
+  - id: "patterns"
+    priority: 2
+    description: "How to implement features consistently"
+    
+  # Add more sections as needed:
+  # - id: "schemas"
+  # - id: "workflows"  
+  # - id: "testing"
+  # - id: "examples"
+  # etc.
+
+# ==============================================================================
+# QUICK REFERENCE - Map tasks to documentation
+# ==============================================================================
+# This is the most used section! Map common tasks to exact file locations.
+# Format: task_name: "path/to/file.yaml#section-id"
+quick_reference:
+  # Example mappings (replace with your actual tasks):
+  new_component: "patterns/component.yaml#react-component"
+  new_api_endpoint: "patterns/api.yaml#endpoint-template"
+  run_tests: "workflows/testing.yaml#run-all"
+  
+  # Add your common tasks here
+
+# ==============================================================================
+# CRITICAL CONSTRAINTS - Must check before any code generation
+# ==============================================================================
+# List the most important rules agents must follow
+# Format: ref: "path/to/file.yaml#rule-id"
+critical_constraints:
+  - ref: "constraints/security.yaml#no-secrets-in-code"
+  # Add more critical constraints
+
+# ==============================================================================
+# GLOSSARY - Domain-specific terms
+# ==============================================================================
+# Define terms specific to your project/domain
+glossary:
+  term1: "Definition of term1"
+  term2: "Definition of term2"
+
+# ==============================================================================
+# DEPENDENCIES - Tech stack snapshot
+# ==============================================================================
+# Document key versions for context (optional but helpful)
+dependencies:
+  runtime:
+    language: ">=version"  # e.g., node: ">=20.0.0"
+    framework: "^version"  # e.g., react: "^19.0.0"
+  
+  key_libraries:
+    purpose: "library"     # e.g., http_client: "axios"
+
+# ==============================================================================
+# ENVIRONMENTS - Where code runs
+# ==============================================================================
+environments:
+  local:
+    setup_ref: "workflows/setup.yaml"  # Link to setup instructions
+    # Add relevant info like ports, URLs, etc.
+    
+  production:
+    deployment_ref: "workflows/deployment.yaml"
+    # Add relevant info

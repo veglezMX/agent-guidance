@@ -1,0 +1,73 @@
+patterns:
+  - id: "custom-hook"
+    category: "hook"
+    applies_to: ["frontend"]
+    
+    description: "Custom React hook for reusable logic"
+    
+    template: |
+      import { useState, useEffect } from 'react'
+      
+      export function use{HookName}(param: ParamType) {
+        const [state, setState] = useState<StateType>(initialValue)
+        
+        useEffect(() => {
+          // Side effects here
+          return () => {
+            // Cleanup here
+          }
+        }, [param])
+        
+        return state
+      }
+    
+    rules:
+      - "Hook name must start with 'use' prefix"
+      - "Must be in its own file"
+      - "Return useful state/functions"
+      - "Include cleanup in useEffect if needed"
+    
+    naming:
+      file: "use{HookName}.ts"
+      function: "use{HookName}"
+      convention: "camelCase after 'use' prefix"
+    
+    example_ref: "code-examples/useCounter.ts"
+
+  - id: "data-fetching-hook"
+    category: "hook"
+    applies_to: ["frontend"]
+    
+    description: "Hook for fetching data with loading and error states"
+    
+    template: |
+      import { useState, useEffect } from 'react'
+      
+      interface Use{HookName}Result<T> {
+        data: T | null
+        loading: boolean
+        error: Error | null
+      }
+      
+      export function use{HookName}<T>(url: string): Use{HookName}Result<T> {
+        const [data, setData] = useState<T | null>(null)
+        const [loading, setLoading] = useState(true)
+        const [error, setError] = useState<Error | null>(null)
+        
+        useEffect(() => {
+          fetch(url)
+            .then(res => res.json())
+            .then(setData)
+            .catch(setError)
+            .finally(() => setLoading(false))
+        }, [url])
+        
+        return { data, loading, error }
+      }
+    
+    rules:
+      - "Return object with data, loading, error"
+      - "Use generics for data type"
+      - "Handle all promise states"
+    
+    example_ref: "code-examples/useFetch.ts"

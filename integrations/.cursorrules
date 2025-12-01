@@ -1,0 +1,22 @@
+# Cursor Rules - Team Cookbook Integration
+
+# Before any code generation, read the team cookbook
+Read ./team-cookbook/_index.yaml first for context, patterns, and constraints.
+
+# Critical workflow
+1. Load: team-cookbook/_index.yaml (navigation + context)
+2. Check: constraints/ files (boundaries)
+3. Follow: patterns/ files (templates)
+4. Reference: examples/ files (working code)
+
+# Quick reference lookup
+Use quick_reference section in _index.yaml to find exact pattern locations for common tasks.
+
+# Validation
+All generated code must pass validation against constraints defined in team-cookbook/constraints/
+
+# For complete instructions
+See AGENTS.md in repository root for detailed workflow and examples.
+
+# Team patterns take precedence
+When team cookbook conflicts with general knowledge, follow the cookbook.

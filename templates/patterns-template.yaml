@@ -1,0 +1,83 @@
+# ==============================================================================
+# PATTERNS TEMPLATE
+# ==============================================================================
+# Define how to implement features consistently.
+# Each pattern should have a template, rules, and optionally an example reference.
+#
+# Instructions:
+# 1. Give each pattern a unique ID
+# 2. Provide a copy-paste template
+# 3. List clear rules
+# 4. Reference working examples
+# ==============================================================================
+
+patterns:
+  # ==============================================================================
+  # PATTERN EXAMPLE 1
+  # ==============================================================================
+  - id: "pattern-name"              # Unique identifier (use in quick_reference)
+    category: "category"            # e.g., "api", "component", "database"
+    applies_to: ["context"]         # e.g., ["frontend"], ["backend"]
+    
+    # Brief description (optional, keep minimal)
+    description: "One line describing what this pattern does"
+    
+    # Template with placeholders (MOST IMPORTANT)
+    template: |
+      // This is the code structure to follow
+      // Use PLACEHOLDERS in {curlyBraces} for variable parts
+      
+      interface {Name}Props {
+        requiredField: string
+        optionalField?: number
+      }
+      
+      export function {Name}({ requiredField }: {Name}Props) {
+        // Implementation here
+        return <div>{requiredField}</div>
+      }
+    
+    # Rules that must be followed
+    rules:
+      - "Rule 1: Specific, actionable requirement"
+      - "Rule 2: Another clear requirement"
+      - "Rule 3: What to avoid"
+    
+    # Naming conventions
+    naming:
+      files: "PascalCase.tsx"
+      functions: "camelCase"
+      interfaces: "{Name}Props"
+    
+    # Reference to working example (if exists)
+    example_ref: "examples/WorkingExample.tsx"
+    
+    # Related patterns (optional)
+    related:
+      - "other-pattern-id"
+
+  # ==============================================================================
+  # PATTERN EXAMPLE 2 - Simpler pattern
+  # ==============================================================================
+  - id: "simple-pattern"
+    category: "utility"
+    
+    template: |
+      export function utilityFunction(param: Type): ReturnType {
+        // Simple function template
+        return result
+      }
+    
+    rules:
+      - "Must be pure function (no side effects)"
+      - "Must have explicit return type"
+
+# ==============================================================================
+# PATTERN CATEGORIES
+# ==============================================================================
+# Define what categories mean (optional but helpful)
+categories:
+  api: "HTTP endpoints and request handlers"
+  component: "UI components and widgets"
+  database: "Data access and persistence"
+  utility: "Helper functions and tools"

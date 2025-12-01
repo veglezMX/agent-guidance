@@ -1,0 +1,194 @@
+cookbook_version: "1.0.0"
+last_updated: "2024-12-01"
+team: "ML Platform Team"
+
+context:
+  stack: ["Python 3.11", "PyTorch 2.x", "FastAPI", "MLflow", "Ray"]
+  infrastructure: "GPU clusters, S3 storage, model registry"
+  primary_patterns: ["experiment_tracking", "feature_stores", "model_versioning"]
+  compute: "A100 GPUs, distributed training"
+
+sections:
+  - id: "constraints"
+    priority: 1
+    description: "Reproducibility requirements, compute limits, data governance"
+    
+  - id: "environment"
+    priority: 2
+    description: "Conda/venv setup, CUDA config, dependency pinning, Docker images"
+    
+  - id: "data"
+    priority: 3
+    description: "Dataset versioning, data loaders, preprocessing pipelines, feature stores"
+    
+  - id: "experiments"
+    priority: 4
+    description: "Experiment tracking, hyperparameter tuning, logging, reproducibility"
+    
+  - id: "training"
+    priority: 5
+    description: "Training loops, distributed training, checkpointing, early stopping"
+    
+  - id: "models"
+    priority: 6
+    description: "Model architectures, versioning, registry, metadata"
+    
+  - id: "evaluation"
+    priority: 7
+    description: "Metrics, validation strategies, A/B testing, benchmark datasets"
+    
+  - id: "deployment"
+    priority: 8
+    description: "Model serving, inference optimization, API endpoints, scaling"
+    
+  - id: "monitoring"
+    priority: 9
+    description: "Model drift, performance tracking, retraining triggers, alerts"
+    
+  - id: "pipelines"
+    priority: 10
+    description: "Data pipelines, training workflows, CI/CD for ML, orchestration"
+    
+  - id: "optimization"
+    priority: 11
+    description: "Quantization, pruning, ONNX export, TensorRT, inference speed"
+    
+  - id: "testing"
+    priority: 12
+    description: "Unit tests, model tests, data validation, regression tests"
+    
+  - id: "decisions"
+    priority: 13
+    description: "Framework choices, architecture decisions, tooling rationale"
+    
+  - id: "examples"
+    priority: 14
+    description: "End-to-end training, serving examples, pipeline templates"
+
+quick_reference:
+  # Experimentation
+  new_experiment: "experiments/mlflow.yaml#create-experiment"
+  log_metrics: "experiments/mlflow.yaml#log-metrics-params"
+  compare_runs: "experiments/mlflow.yaml#compare-runs"
+  
+  # Data
+  load_dataset: "data/loaders.yaml#torch-dataloader"
+  version_dataset: "data/versioning.yaml#dvc-track"
+  create_feature: "data/features.yaml#feature-store-write"
+  
+  # Training
+  train_model: "training/single-gpu.yaml#training-loop"
+  distributed_train: "training/multi-gpu.yaml#ddp-setup"
+  resume_training: "training/checkpointing.yaml#load-checkpoint"
+  
+  # Model Management
+  save_model: "models/registry.yaml#mlflow-save"
+  load_model: "models/registry.yaml#mlflow-load"
+  version_model: "models/versioning.yaml#semantic-versioning"
+  
+  # Deployment
+  serve_model: "deployment/fastapi.yaml#inference-endpoint"
+  batch_inference: "deployment/batch.yaml#ray-serve"
+  optimize_inference: "optimization/inference.yaml#onnx-conversion"
+  
+  # Monitoring
+  track_predictions: "monitoring/logging.yaml#prediction-logging"
+  detect_drift: "monitoring/drift.yaml#evidently-detection"
+  
+  # Pipelines
+  data_pipeline: "pipelines/data.yaml#ray-pipeline"
+  training_pipeline: "pipelines/training.yaml#kubeflow-pipeline"
+  
+  # Common Issues
+  cuda_oom: "troubleshooting/gpu.yaml#out-of-memory"
+  slow_training: "troubleshooting/performance.yaml#bottleneck-analysis"
+  non_reproducible: "troubleshooting/reproducibility.yaml#seed-everything"
+
+critical_constraints:
+  - ref: "constraints/reproducibility.yaml#seed-all-random"
+  - ref: "constraints/reproducibility.yaml#version-everything"
+  - ref: "constraints/data.yaml#no-data-leakage"
+  - ref: "constraints/data.yaml#pii-handling"
+  - ref: "constraints/compute.yaml#gpu-memory-limits"
+  - ref: "constraints/compute.yaml#spot-instance-checkpointing"
+  - ref: "constraints/models.yaml#model-size-limits"
+
+glossary:
+  experiment: "Single training run with specific hyperparameters and data"
+  run_id: "Unique identifier for experiment run in MLflow"
+  artifact: "Model checkpoint, plot, or file logged to experiment"
+  feature_store: "Centralized repository for ML features with versioning"
+  model_registry: "Centralized storage for trained models with lifecycle"
+  drift: "Statistical change in data distribution over time"
+  checkpoint: "Saved model state during training for resumption"
+  epoch: "One complete pass through training dataset"
+  ddp: "Distributed Data Parallel - multi-GPU training strategy"
+
+dependencies:
+  runtime:
+    python: "==3.11.9"  # Pin exact version for reproducibility
+    torch: "==2.5.0"
+    torchvision: "==0.20.0"
+    cuda: "12.1"
+    
+  ml_frameworks:
+    transformers: "^4.45.0"
+    pytorch-lightning: "^2.4.0"
+    
+  experiment_tracking:
+    mlflow: "^2.17.0"
+    wandb: "^0.18.0"
+    
+  data:
+    datasets: "^3.0.0"
+    dvc: "^3.56.0"
+    pandas: "^2.2.0"
+    pyarrow: "^18.0.0"
+    
+  deployment:
+    fastapi: "^0.115.0"
+    ray: "^2.38.0"
+    onnx: "^1.17.0"
+    onnxruntime-gpu: "^1.20.0"
+    
+  monitoring:
+    evidently: "^0.4.0"
+    prometheus-client: "^0.21.0"
+    
+  orchestration:
+    prefect: "^3.1.0"
+    # or: kubeflow-pipelines: "^2.0.0"
+    
+  dev:
+    pytest: "^8.3.0"
+    black: "^24.10.0"
+    ruff: "^0.7.0"
+
+environments:
+  local:
+    setup_ref: "environment/setup.yaml#local-gpu"
+    gpu_count: 1
+    data_path: "./data"
+    mlflow_uri: "http://localhost:5000"
+    
+  dev_cluster:
+    gpu_count: 4
+    gpu_type: "A100-40GB"
+    data_path: "s3://ml-data-dev/"
+    mlflow_uri: "https://mlflow-dev.company.com"
+    
+  production:
+    deployment_ref: "deployment/kubernetes.yaml"
+    serving_ref: "deployment/ray-serve.yaml"
+    monitoring_ref: "monitoring/production.yaml"
+    gpu_type: "A100-80GB"
+    autoscaling: true
+
+# ML-specific metadata
+ml_lifecycle:
+  stages: ["experiment", "staging", "production", "archived"]
+  promotion_criteria:
+    - "accuracy > baseline + 2%"
+    - "latency < 100ms p99"
+    - "drift score < 0.3"
+    - "peer review approved"

@@ -1,0 +1,43 @@
+{
+  "systemMessage": "You are a helpful coding assistant. Before generating any code, read ./team-cookbook/_index.yaml for team patterns, constraints, and conventions. Follow the workflow in AGENTS.md. Team patterns take precedence over general knowledge.",
+  
+  "contextProviders": [
+    {
+      "name": "file",
+      "params": {
+        "file": "team-cookbook/_index.yaml"
+      }
+    },
+    {
+      "name": "file",
+      "params": {
+        "file": "AGENTS.md"
+      }
+    }
+  ],
+  
+  "docs": [
+    {
+      "title": "Team Cookbook",
+      "startUrl": "./team-cookbook/_index.yaml",
+      "description": "Team patterns and constraints"
+    }
+  ],
+  
+  "rules": [
+    "Always check team-cookbook/_index.yaml before code generation",
+    "Validate against constraints in team-cookbook/constraints/",
+    "Follow templates from team-cookbook/patterns/",
+    "Reference examples from team-cookbook/examples/"
+  ],
+  
+  "models": [
+    {
+      "title": "Claude Sonnet",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "contextLength": 200000,
+      "systemMessage": "Check team-cookbook/_index.yaml and follow patterns defined there. See AGENTS.md for workflow."
+    }
+  ]
+}
