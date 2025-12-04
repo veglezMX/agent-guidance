@@ -133,6 +133,8 @@ team-cookbook/
 "Read the cookbook at ./team-cookbook/_index.yaml before starting"
 ```
 
+You can copy and paste the file `../templates/AGENTS.md` into your environment.
+
 ### Step 2: Agent Navigates Automatically
 - Loads context and tech stack
 - Checks constraints first
@@ -146,9 +148,9 @@ team-cookbook/
 
 ## 5-Minute Setup for Your Team
 
-### 1. Copy Template
+### 1. Copy the Mini-Complete Example
 ```bash
-cp -r templates/starter-cookbook ./my-team-cookbook
+cp -r examples/mini-complete ./my-team-cookbook
 ```
 
 ### 2. Edit `_index.yaml`
@@ -230,7 +232,7 @@ A: Break it into smaller patterns, or add detailed examples.
 ## Next Steps
 
 1. **See it in action**: Check `examples/mini-complete/` for a tiny but complete cookbook
-2. **Copy a template**: Use `templates/` to start your own
+2. **Use individual templates**: Check `templates/` for `_index.yaml`, constraints, and patterns templates
 3. **Read full docs**: See `README.md` for complete reference
 
 ## Visual: Full Agent Decision Flow
