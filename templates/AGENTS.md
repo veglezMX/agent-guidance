@@ -3,7 +3,7 @@
 ## Overview
 This project uses a **Cookbook System** for consistent code generation. Before implementing any features, you MUST read the team cookbook to understand patterns, constraints, and conventions.
 
-## 🎯 Quick Start for AI Agents
+## Quick Start for AI Agents
 
 ### 1. Load the Cookbook Index
 ```yaml
@@ -38,7 +38,7 @@ Location: ./team-cookbook/examples/
 
 **Action**: Copy structure from working code examples.
 
-## 📋 Cookbook System Flow
+## Cookbook System Flow
 
 ```
 User Request
@@ -58,7 +58,7 @@ Generate: compliant code
 Validate: against constraints
 ```
 
-## 🚨 Critical Rules
+## Critical Rules
 
 ### ALWAYS Check These Before Coding:
 1. **Read `_index.yaml`** - Get context and navigation
@@ -67,12 +67,12 @@ Validate: against constraints
 4. **Reference `examples/`** - Copy working code
 
 ### NEVER Do This:
-- ❌ Generate code without reading cookbook first
-- ❌ Ignore constraint files
-- ❌ Invent patterns not in the cookbook
-- ❌ Skip validation against constraints
+- Generate code without reading cookbook first
+- Ignore constraint files
+- Invent patterns not in the cookbook
+- Skip validation against constraints
 
-## 🔍 How to Use the Cookbook
+## How to Use the Cookbook
 
 ### For New Components:
 ```
@@ -104,7 +104,7 @@ Validate: against constraints
 6. Validate against constraints
 ```
 
-## 📂 Cookbook Location
+## Cookbook Location
 
 ```
 Primary cookbook location: ./team-cookbook/
@@ -116,7 +116,7 @@ Alternative locations:
 If not found: Ask user for cookbook location
 ```
 
-## 🎨 Code Generation Rules
+## Code Generation Rules
 
 ### TypeScript/React Projects:
 ```yaml
@@ -140,7 +140,7 @@ If not found: Ask user for cookbook location
 3. **Use exact naming conventions from patterns**
 4. **Copy structure from examples when available**
 
-## 🔗 Integration with IDE
+## Integration with IDE
 
 ### VSCode Extensions:
 - **Cursor**: Reads this file automatically
@@ -157,7 +157,7 @@ If not found: Ask user for cookbook location
 }
 ```
 
-## 📚 Documentation Structure
+## Documentation Structure
 
 ```
 team-cookbook/
@@ -172,7 +172,7 @@ team-cookbook/
 └── troubleshooting/         ← Common issues
 ```
 
-## 🎯 Example: Creating a Button Component
+## Example: Creating a Button Component
 
 ```yaml
 # Agent reads this file (AGENTS.md)
@@ -193,7 +193,7 @@ quick_reference:
 # Agent generates: Compliant Button component
 ```
 
-## 🚀 Quick Reference Lookup
+## Quick Reference Lookup
 
 Common tasks mapping (load from _index.yaml for full list):
 
@@ -205,7 +205,7 @@ new_test: "testing/unit.yaml#test-template"
 new_utility: "patterns/utilities.yaml#pure-function"
 ```
 
-## 📖 Additional Resources
+## Additional Resources
 
 - **System Overview**: `./team-cookbook/README.md`
 - **Quick Start**: `./team-cookbook/QUICKSTART.md`
@@ -213,7 +213,7 @@ new_utility: "patterns/utilities.yaml#pure-function"
 - **Templates**: `./team-cookbook/templates/`
 - **Complete Example**: `./team-cookbook/examples/mini-complete/`
 
-## 🔄 Workflow Summary
+## Workflow Summary
 
 ```
 1. User: "Create a login form component"
@@ -228,7 +228,7 @@ new_utility: "patterns/utilities.yaml#pure-function"
 10. Agent: Return compliant code
 ```
 
-## ⚠️ Important Notes
+## Important Notes
 
 ### For AI Coding Assistants:
 - **Context Window Management**: Load only relevant sections, not entire cookbook
@@ -242,7 +242,7 @@ new_utility: "patterns/utilities.yaml#pure-function"
 - Point to correct _index.yaml path
 - Maintain quick_reference mappings
 
-## 🎓 Philosophy
+## Philosophy
 
 > "If you can't explain it simply, you don't understand it well enough." - Einstein
 
